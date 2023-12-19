@@ -1,0 +1,1486 @@
+{
+  "compatibilityLevel": 1567,
+  "model": {
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Crude Oil and Petroleum Products Inventories\",\"inventory_type\",\"crude_oil_refined_products_inv_dom_trans\",\"oil_price\",\"products\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "1"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.123.742.0 (23.11)"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\",\"CalcGroup\",\"DaxQueryView_Desktop\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "DynamicImprovement": "HighConfidence",
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "discourageImplicitMeasures": true,
+    "expressions": [
+      {
+        "name": "Crude Oil and Petroleum Products Inventories",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Csv.Document(File.Contents(\"C:\\Users\\admin\\Desktop\\LaDV_Consulting\\CaseStudies\\Data\\Energy Analytics\\PIPELINE AND INVENTORY ANALYSIS\\Data Sources\\2510007501-eng.csv\"),[Delimiter=\",\", Columns=48, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}, {\"Column2\", type text}, {\"Column3\", type text}, {\"Column4\", type text}, {\"Column5\", type text}, {\"Column6\", type text}, {\"Column7\", type text}, {\"Column8\", type text}, {\"Column9\", type text}, {\"Column10\", type text}, {\"Column11\", type text}, {\"Column12\", type text}, {\"Column13\", type text}, {\"Column14\", type text}, {\"Column15\", type text}, {\"Column16\", type text}, {\"Column17\", type text}, {\"Column18\", type text}, {\"Column19\", type text}, {\"Column20\", type text}, {\"Column21\", type text}, {\"Column22\", type text}, {\"Column23\", type text}, {\"Column24\", type text}, {\"Column25\", type text}, {\"Column26\", type text}, {\"Column27\", type text}, {\"Column28\", type text}, {\"Column29\", type text}, {\"Column30\", type text}, {\"Column31\", type text}, {\"Column32\", type text}, {\"Column33\", type text}, {\"Column34\", type text}, {\"Column35\", type text}, {\"Column36\", type text}, {\"Column37\", type text}, {\"Column38\", type text}, {\"Column39\", type text}, {\"Column40\", type text}, {\"Column41\", type text}, {\"Column42\", type text}, {\"Column43\", type text}, {\"Column44\", type text}, {\"Column45\", type text}, {\"Column46\", type text}, {\"Column47\", type text}, {\"Column48\", type text}}),",
+          "    #\"Removed Top Rows\" = Table.Skip(#\"Changed Type\",9),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Removed Top Rows\", [PromoteAllScalars=true])",
+          "in",
+          "    #\"Promoted Headers\""
+        ],
+        "kind": "m",
+        "lineageTag": "d1ac9abe-305a-45a7-8a57-16dfa06681f2",
+        "queryGroup": "Source"
+      }
+    ],
+    "queryGroups": [
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "description": [
+          "Source Table : Crude oil and petroleum products inventories, held by domestic transporters, by product type, monthly",
+          " 2510007501"
+        ],
+        "folder": "Source"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "1"
+          }
+        ],
+        "description": "Dimensionally Modelled Data cube for analysis",
+        "folder": "Datamart"
+      }
+    ],
+    "relationships": [
+      {
+        "name": "d7a5c499-8a87-4d3b-9f02-13f9d889082b",
+        "fromColumn": "Attribute",
+        "fromTable": "crude_oil_refined_products_inv_dom_trans",
+        "toColumn": "Date",
+        "toTable": "Date"
+      },
+      {
+        "name": "f694f5d8-3c19-4ae5-a216-4ada6af35e37",
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "Date",
+        "fromTable": "oil_price",
+        "toColumn": "Date",
+        "toTable": "Date"
+      },
+      {
+        "name": "ab8915af-2062-49ea-9919-e4ab3e342896",
+        "crossFilteringBehavior": "bothDirections",
+        "fromColumn": "Products",
+        "fromTable": "crude_oil_refined_products_inv_dom_trans",
+        "securityFilteringBehavior": "bothDirections",
+        "toColumn": "Products",
+        "toTable": "products"
+      },
+      {
+        "name": "01756f48-f0b3-4e96-adca-796d89479e7e",
+        "fromColumn": "invid",
+        "fromTable": "crude_oil_refined_products_inv_dom_trans",
+        "toColumn": "invid",
+        "toTable": "inventory_type"
+      }
+    ],
+    "sourceQueryCulture": "en-CA",
+    "tables": [
+      {
+        "name": "DateTableTemplate_82803ce6-efff-4803-a25a-fc76ef60250a",
+        "annotations": [
+          {
+            "name": "__PBI_TemplateDateTable",
+            "value": "true"
+          },
+          {
+            "name": "DefaultItem",
+            "value": "DateHierarchy"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "ff09cb47-fb16-4fef-9e5f-ca31d7d7040f",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isHidden": true,
+            "lineageTag": "13d8bde6-38d1-4230-ac4c-b3457ecbb9a7",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isHidden": true,
+            "lineageTag": "eb3475f7-4b91-45d1-a6f2-c96a85915dc3",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "4ad82bf8-f4a1-4589-b78c-2e4d900c1be9",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isHidden": true,
+            "lineageTag": "f8bc7d4f-c86e-4430-9a4e-605aaa0be086",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "547aa6e1-3b13-43d8-bb94-ec45e4de9bf2",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isHidden": true,
+            "lineageTag": "fe5e79d4-4018-41fa-a78a-6b2cc80e4949",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "12993caf-15e8-4384-80b6-5047987a1bb1",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "e8ea12f6-8cbf-453c-8540-8f3b24135678",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "288ad137-527f-43ec-871a-b02f2b90944d",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "5ff3efa2-561c-4c92-8e45-df30d5661795",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "fd3c9d24-7f5f-4720-935f-f212be72d98a"
+          }
+        ],
+        "isHidden": true,
+        "isPrivate": true,
+        "lineageTag": "6035cab4-2a73-4736-bc89-d80c5899c27f",
+        "partitions": [
+          {
+            "name": "DateTableTemplate_82803ce6-efff-4803-a25a-fc76ef60250a",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(2015,1,1), Date(2015,1,1))",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "inventory_type",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "invid",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "0a9ba0d4-688e-429e-be93-31d581fbf112",
+            "sourceColumn": "invid",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Inventory Type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ac430d66-084f-483c-acda-3993defadea1",
+            "sourceColumn": "Inventory Type",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "b46781db-dddb-4774-b6b0-0cb62a805519",
+        "partitions": [
+          {
+            "name": "inventory_type",
+            "mode": "import",
+            "queryGroup": "Datamart",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\admin\\Desktop\\LaDV_Consulting\\CaseStudies\\Data\\Energy Analytics\\PIPELINE AND INVENTORY ANALYSIS\\Data Sources\\2510007501-eng.csv\"),[Delimiter=\",\", Columns=48, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}, {\"Column2\", type text}, {\"Column3\", type text}, {\"Column4\", type text}, {\"Column5\", type text}, {\"Column6\", type text}, {\"Column7\", type text}, {\"Column8\", type text}, {\"Column9\", type text}, {\"Column10\", type text}, {\"Column11\", type text}, {\"Column12\", type text}, {\"Column13\", type text}, {\"Column14\", type text}, {\"Column15\", type text}, {\"Column16\", type text}, {\"Column17\", type text}, {\"Column18\", type text}, {\"Column19\", type text}, {\"Column20\", type text}, {\"Column21\", type text}, {\"Column22\", type text}, {\"Column23\", type text}, {\"Column24\", type text}, {\"Column25\", type text}, {\"Column26\", type text}, {\"Column27\", type text}, {\"Column28\", type text}, {\"Column29\", type text}, {\"Column30\", type text}, {\"Column31\", type text}, {\"Column32\", type text}, {\"Column33\", type text}, {\"Column34\", type text}, {\"Column35\", type text}, {\"Column36\", type text}, {\"Column37\", type text}, {\"Column38\", type text}, {\"Column39\", type text}, {\"Column40\", type text}, {\"Column41\", type text}, {\"Column42\", type text}, {\"Column43\", type text}, {\"Column44\", type text}, {\"Column45\", type text}, {\"Column46\", type text}, {\"Column47\", type text}, {\"Column48\", type text}}),",
+                "    #\"Removed Top Rows\" = Table.Skip(#\"Changed Type\",9),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Removed Top Rows\", [PromoteAllScalars=true]),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Inventories\", type text}, {\"Mode of transport\", type text}, {\"Products\", type text}, {\"January 2020\", type text}, {\"February 2020\", Int64.Type}, {\"March 2020\", Int64.Type}, {\"April 2020\", Int64.Type}, {\"May 2020\", Int64.Type}, {\"June 2020\", Int64.Type}, {\"July 2020\", Int64.Type}, {\"August 2020\", Int64.Type}, {\"September 2020\", Int64.Type}, {\"October 2020\", Int64.Type}, {\"November 2020\", Int64.Type}, {\"December 2020\", Int64.Type}, {\"January 2021\", Int64.Type}, {\"February 2021\", Int64.Type}, {\"March 2021\", Int64.Type}, {\"April 2021\", Int64.Type}, {\"May 2021\", Int64.Type}, {\"June 2021\", Int64.Type}, {\"July 2021\", Int64.Type}, {\"August 2021\", Int64.Type}, {\"September 2021\", Int64.Type}, {\"October 2021\", Int64.Type}, {\"November 2021\", Int64.Type}, {\"December 2021\", Int64.Type}, {\"January 2022\", Int64.Type}, {\"February 2022\", Int64.Type}, {\"March 2022\", Int64.Type}, {\"April 2022\", Int64.Type}, {\"May 2022\", Int64.Type}, {\"June 2022\", Int64.Type}, {\"July 2022\", Int64.Type}, {\"August 2022\", Int64.Type}, {\"September 2022\", Int64.Type}, {\"October 2022\", Int64.Type}, {\"November 2022\", Int64.Type}, {\"December 2022\", Int64.Type}, {\"January 2023\", Int64.Type}, {\"February 2023\", Int64.Type}, {\"March 2023\", Int64.Type}, {\"April 2023\", Int64.Type}, {\"May 2023\", Int64.Type}, {\"June 2023\", Int64.Type}, {\"July 2023\", Int64.Type}, {\"August 2023\", Int64.Type}, {\"September 2023\", Int64.Type}}),",
+                "    #\"Removed Bottom Rows\" = Table.RemoveLastN(#\"Changed Type1\",13),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Removed Bottom Rows\",{\"Mode of transport\"}),",
+                "    #\"Added Index\" = Table.AddIndexColumn(#\"Removed Columns\", \"Index\", 1, 1, Int64.Type),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Added Index\",{\"Index\", \"Inventories\", \"Products\", \"January 2020\", \"February 2020\", \"March 2020\", \"April 2020\", \"May 2020\", \"June 2020\", \"July 2020\", \"August 2020\", \"September 2020\", \"October 2020\", \"November 2020\", \"December 2020\", \"January 2021\", \"February 2021\", \"March 2021\", \"April 2021\", \"May 2021\", \"June 2021\", \"July 2021\", \"August 2021\", \"September 2021\", \"October 2021\", \"November 2021\", \"December 2021\", \"January 2022\", \"February 2022\", \"March 2022\", \"April 2022\", \"May 2022\", \"June 2022\", \"July 2022\", \"August 2022\", \"September 2022\", \"October 2022\", \"November 2022\", \"December 2022\", \"January 2023\", \"February 2023\", \"March 2023\", \"April 2023\", \"May 2023\", \"June 2023\", \"July 2023\", \"August 2023\", \"September 2023\"}),",
+                "    #\"Merged Columns\" = Table.CombineColumns(Table.TransformColumnTypes(#\"Reordered Columns\", {{\"Index\", type text}}, \"en-CA\"),{\"Index\", \"Inventories\"},Combiner.CombineTextByDelimiter(\"\", QuoteStyle.None),\"Merged\"),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Merged Columns\",\"2\",\"Opening Inventories\",Replacer.ReplaceText,{\"Merged\"}),",
+                "    #\"Replaced Value1\" = Table.ReplaceValue(#\"Replaced Value\",\"3\",\"Opening Inventories\",Replacer.ReplaceText,{\"Merged\"}),",
+                "    #\"Removed Top Rows1\" = Table.Skip(#\"Replaced Value1\",1),",
+                "    #\"Replaced Value2\" = Table.ReplaceValue(#\"Removed Top Rows1\",\"5\",\"Closed Inventories\",Replacer.ReplaceText,{\"Merged\"}),",
+                "    #\"Unpivoted Other Columns\" = Table.UnpivotOtherColumns(#\"Replaced Value2\", {\"Merged\", \"Products\"}, \"Attribute\", \"Value\"),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Unpivoted Other Columns\",{{\"Attribute\", type date}, {\"Value\", Int64.Type}}),",
+                "    #\"Replaced Value3\" = Table.ReplaceValue(#\"Changed Type2\",\" 2\",\"\",Replacer.ReplaceText,{\"Products\"}),",
+                "    #\"Sorted Rows\" = Table.Sort(#\"Replaced Value3\",{{\"Attribute\", Order.Ascending}}),",
+                "    #\"Replaced Value4\" = Table.ReplaceValue(#\"Sorted Rows\",\"4\",\"\",Replacer.ReplaceText,{\"Merged\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Replaced Value4\",{{\"Merged\", \"Inventory Type\"}}),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Renamed Columns\",{\"Inventory Type\"}),",
+                "    #\"Sorted Rows1\" = Table.Sort(#\"Removed Other Columns\",{{\"Inventory Type\", Order.Ascending}}),",
+                "    #\"Replaced Value5\" = Table.ReplaceValue(#\"Sorted Rows1\",\"Closing inventories\",\"Closed Inventories\",Replacer.ReplaceText,{\"Inventory Type\"}),",
+                "    #\"Removed Duplicates\" = Table.Distinct(#\"Replaced Value5\"),",
+                "    #\"Added Index1\" = Table.AddIndexColumn(#\"Removed Duplicates\", \"Index\", 1, 1, Int64.Type),",
+                "    #\"Reordered Columns1\" = Table.ReorderColumns(#\"Added Index1\",{\"Index\", \"Inventory Type\"}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Reordered Columns1\",{{\"Index\", \"invid\"}})",
+                "in",
+                "    #\"Renamed Columns1\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "crude_oil_refined_products_inv_dom_trans",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Attribute",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "isHidden": true,
+            "lineageTag": "675bcffa-81ab-46da-bf48-0d98e8f97242",
+            "sourceColumn": "Attribute",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Value",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "41e07752-c560-4b1a-bebd-9bb4617af740",
+            "sourceColumn": "Value",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Inventory Type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "string",
+            "isHidden": true,
+            "lineageTag": "173e6ac4-228c-484b-ab51-ef6d3f73f6b3",
+            "sourceColumn": "Inventory Type",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Products",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "string",
+            "isHidden": true,
+            "lineageTag": "3273aee1-82e2-4461-a8c8-76a44aa40e42",
+            "sourceColumn": "Products",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "prid",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "6fdf2275-8981-417a-b4bf-7834cfdebe2e",
+            "sourceColumn": "prid",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "invid",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "5b7d7f78-4929-4604-9d74-f7cc3ce40a2b",
+            "sourceColumn": "invid",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "d3866c47-4cb5-4aa9-817f-9930e11bbf40",
+        "partitions": [
+          {
+            "name": "crude_oil_refined_products_inv_dom_trans",
+            "mode": "import",
+            "queryGroup": "Datamart",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\admin\\Desktop\\LaDV_Consulting\\CaseStudies\\Data\\Energy Analytics\\PIPELINE AND INVENTORY ANALYSIS\\Data Sources\\2510007501-eng.csv\"),[Delimiter=\",\", Columns=48, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}, {\"Column2\", type text}, {\"Column3\", type text}, {\"Column4\", type text}, {\"Column5\", type text}, {\"Column6\", type text}, {\"Column7\", type text}, {\"Column8\", type text}, {\"Column9\", type text}, {\"Column10\", type text}, {\"Column11\", type text}, {\"Column12\", type text}, {\"Column13\", type text}, {\"Column14\", type text}, {\"Column15\", type text}, {\"Column16\", type text}, {\"Column17\", type text}, {\"Column18\", type text}, {\"Column19\", type text}, {\"Column20\", type text}, {\"Column21\", type text}, {\"Column22\", type text}, {\"Column23\", type text}, {\"Column24\", type text}, {\"Column25\", type text}, {\"Column26\", type text}, {\"Column27\", type text}, {\"Column28\", type text}, {\"Column29\", type text}, {\"Column30\", type text}, {\"Column31\", type text}, {\"Column32\", type text}, {\"Column33\", type text}, {\"Column34\", type text}, {\"Column35\", type text}, {\"Column36\", type text}, {\"Column37\", type text}, {\"Column38\", type text}, {\"Column39\", type text}, {\"Column40\", type text}, {\"Column41\", type text}, {\"Column42\", type text}, {\"Column43\", type text}, {\"Column44\", type text}, {\"Column45\", type text}, {\"Column46\", type text}, {\"Column47\", type text}, {\"Column48\", type text}}),",
+                "    #\"Removed Top Rows\" = Table.Skip(#\"Changed Type\",9),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Removed Top Rows\", [PromoteAllScalars=true]),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Inventories\", type text}, {\"Mode of transport\", type text}, {\"Products\", type text}, {\"January 2020\", type text}, {\"February 2020\", Int64.Type}, {\"March 2020\", Int64.Type}, {\"April 2020\", Int64.Type}, {\"May 2020\", Int64.Type}, {\"June 2020\", Int64.Type}, {\"July 2020\", Int64.Type}, {\"August 2020\", Int64.Type}, {\"September 2020\", Int64.Type}, {\"October 2020\", Int64.Type}, {\"November 2020\", Int64.Type}, {\"December 2020\", Int64.Type}, {\"January 2021\", Int64.Type}, {\"February 2021\", Int64.Type}, {\"March 2021\", Int64.Type}, {\"April 2021\", Int64.Type}, {\"May 2021\", Int64.Type}, {\"June 2021\", Int64.Type}, {\"July 2021\", Int64.Type}, {\"August 2021\", Int64.Type}, {\"September 2021\", Int64.Type}, {\"October 2021\", Int64.Type}, {\"November 2021\", Int64.Type}, {\"December 2021\", Int64.Type}, {\"January 2022\", Int64.Type}, {\"February 2022\", Int64.Type}, {\"March 2022\", Int64.Type}, {\"April 2022\", Int64.Type}, {\"May 2022\", Int64.Type}, {\"June 2022\", Int64.Type}, {\"July 2022\", Int64.Type}, {\"August 2022\", Int64.Type}, {\"September 2022\", Int64.Type}, {\"October 2022\", Int64.Type}, {\"November 2022\", Int64.Type}, {\"December 2022\", Int64.Type}, {\"January 2023\", Int64.Type}, {\"February 2023\", Int64.Type}, {\"March 2023\", Int64.Type}, {\"April 2023\", Int64.Type}, {\"May 2023\", Int64.Type}, {\"June 2023\", Int64.Type}, {\"July 2023\", Int64.Type}, {\"August 2023\", Int64.Type}, {\"September 2023\", Int64.Type}}),",
+                "    #\"Removed Bottom Rows\" = Table.RemoveLastN(#\"Changed Type1\",13),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Removed Bottom Rows\",{\"Mode of transport\"}),",
+                "    #\"Added Index\" = Table.AddIndexColumn(#\"Removed Columns\", \"Index\", 1, 1, Int64.Type),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Added Index\",{\"Index\", \"Inventories\", \"Products\", \"January 2020\", \"February 2020\", \"March 2020\", \"April 2020\", \"May 2020\", \"June 2020\", \"July 2020\", \"August 2020\", \"September 2020\", \"October 2020\", \"November 2020\", \"December 2020\", \"January 2021\", \"February 2021\", \"March 2021\", \"April 2021\", \"May 2021\", \"June 2021\", \"July 2021\", \"August 2021\", \"September 2021\", \"October 2021\", \"November 2021\", \"December 2021\", \"January 2022\", \"February 2022\", \"March 2022\", \"April 2022\", \"May 2022\", \"June 2022\", \"July 2022\", \"August 2022\", \"September 2022\", \"October 2022\", \"November 2022\", \"December 2022\", \"January 2023\", \"February 2023\", \"March 2023\", \"April 2023\", \"May 2023\", \"June 2023\", \"July 2023\", \"August 2023\", \"September 2023\"}),",
+                "    #\"Merged Columns\" = Table.CombineColumns(Table.TransformColumnTypes(#\"Reordered Columns\", {{\"Index\", type text}}, \"en-CA\"),{\"Index\", \"Inventories\"},Combiner.CombineTextByDelimiter(\"\", QuoteStyle.None),\"Merged\"),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Merged Columns\",\"2\",\"Opening Inventories\",Replacer.ReplaceText,{\"Merged\"}),",
+                "    #\"Replaced Value1\" = Table.ReplaceValue(#\"Replaced Value\",\"3\",\"Opening Inventories\",Replacer.ReplaceText,{\"Merged\"}),",
+                "    #\"Removed Top Rows1\" = Table.Skip(#\"Replaced Value1\",1),",
+                "    #\"Replaced Value2\" = Table.ReplaceValue(#\"Removed Top Rows1\",\"5\",\"Closed Inventories\",Replacer.ReplaceText,{\"Merged\"}),",
+                "    #\"Unpivoted Other Columns\" = Table.UnpivotOtherColumns(#\"Replaced Value2\", {\"Merged\", \"Products\"}, \"Attribute\", \"Value\"),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Unpivoted Other Columns\",{{\"Attribute\", type date}, {\"Value\", Int64.Type}}),",
+                "    #\"Replaced Value3\" = Table.ReplaceValue(#\"Changed Type2\",\" 2\",\"\",Replacer.ReplaceText,{\"Products\"}),",
+                "    #\"Sorted Rows\" = Table.Sort(#\"Replaced Value3\",{{\"Attribute\", Order.Ascending}}),",
+                "    #\"Replaced Value4\" = Table.ReplaceValue(#\"Sorted Rows\",\"4\",\"\",Replacer.ReplaceText,{\"Merged\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Replaced Value4\",{{\"Merged\", \"Inventory Type\"}}),",
+                "    #\"Replaced Value5\" = Table.ReplaceValue(#\"Renamed Columns\",\"Closing inventories\",\"Closed Inventories\",Replacer.ReplaceText,{\"Inventory Type\"}),",
+                "    #\"Merged Queries\" = Table.NestedJoin(#\"Replaced Value5\", {\"Inventory Type\"}, inventory_type, {\"Inventory Type\"}, \"Dim_Inventory_Type\", JoinKind.LeftOuter),",
+                "    #\"Replaced Value6\" = Table.ReplaceValue(#\"Merged Queries\",\"Hydrocarbon Gas Liquids (HGLs) and Refined Petroleum Products (RPPs) 3\",\"Refined Petroleum Products (RPPs)\",Replacer.ReplaceText,{\"Products\"}),",
+                "    #\"Merged Queries1\" = Table.NestedJoin(#\"Replaced Value6\", {\"Products\"}, products, {\"Products\"}, \"products.1\", JoinKind.LeftOuter),",
+                "    #\"Expanded products.1\" = Table.ExpandTableColumn(#\"Merged Queries1\", \"products.1\", {\"prid\"}, {\"prid\"}),",
+                "    #\"Expanded Dim_Inventory_Type\" = Table.ExpandTableColumn(#\"Expanded products.1\", \"Dim_Inventory_Type\", {\"invid\"}, {\"Dim_Inventory_Type.invid\"}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Expanded Dim_Inventory_Type\",{{\"Dim_Inventory_Type.invid\", \"invid\"}})",
+                "in",
+                "    #\"Renamed Columns1\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Date",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "af6324aa87b6469daad0edcf25e76ea8"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Short Date",
+            "isDataTypeInferred": true,
+            "isKey": true,
+            "isNameInferred": true,
+            "lineageTag": "92251b12-9cf2-406a-935f-524f9beaec51",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "expression": "year('Date'[Date])",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "adb415f9-b6a7-4334-bebe-e518f1b46ab9",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": "\"Q\" & QUARTER('Date'[Date])",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "763dfc70-ed07-4c06-bebf-656a8bf58d35",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": "FORMAT('Date'[Date],\"MMMM\")",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "a7feee69-dfa2-475a-929d-2329d0ca56a4",
+            "sortByColumn": "Month.No",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month.No",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "expression": "MONTH('Date'[Date])",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "lineageTag": "31cffafb-0f3c-4469-b408-8fe453fe9e7e",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "dataCategory": "Time",
+        "hierarchies": [
+          {
+            "name": "Inventory Date",
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "67ac4b9f-bce8-4ee7-9184-2d3f4962521a",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "dacc1f48-23ba-4060-b233-e19044074730",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "d2d1b303-071b-4d28-a6b6-53b96dd58d93",
+                "ordinal": 2
+              }
+            ],
+            "lineageTag": "1d7aeb16-af3a-4557-bb86-f16f2783c1df"
+          }
+        ],
+        "lineageTag": "2d0f2cda-e4fa-468f-aeb1-0e273ac44cf1",
+        "partitions": [
+          {
+            "name": "Date",
+            "mode": "import",
+            "source": {
+              "expression": "CALENDARAUTO()",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Measures table",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "fd93bc2af46b4380bf21452e675af6b5"
+          },
+          {
+            "name": "436ba87b-9c83-4389-a31b-ebd06a36be98",
+            "value": "{\"Expression\":\"\"}"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Column",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "9ca2b4bf-b0ff-43dc-bb83-059166ff37c1",
+            "sourceColumn": "[Column]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "804c2a89-9cd6-4d05-823f-348f990413ad",
+        "measures": [
+          {
+            "name": "Total Refined Petroleum Products Opening Inventory",
+            "displayFolder": "Totals",
+            "expression": [
+              "CALCULATE([Total Opening Inventory],",
+              "    'products'[prid] = 2)"
+            ],
+            "formatString": "0",
+            "lineageTag": "865f4a7e-901d-41f7-affc-74304239ed57"
+          },
+          {
+            "name": "Total Refined Petroleum Products closing Inventory",
+            "displayFolder": "Totals",
+            "expression": [
+              "CALCULATE([Total Closing Inventory],",
+              "    'products'[prid] = 2)"
+            ],
+            "formatString": "0",
+            "lineageTag": "3a5bd5e8-37ac-48c6-ab5e-f652c8b5de5c"
+          },
+          {
+            "name": "Total Opening Inventory",
+            "displayFolder": "Totals",
+            "expression": [
+              "CALCULATE([Total Inventory Volume], ",
+              "    'inventory_type'[invid] = 2)"
+            ],
+            "formatString": "0",
+            "lineageTag": "08ed030e-736e-4d67-8c5d-0332d585d60a"
+          },
+          {
+            "name": "Total Inventory Volume",
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "displayFolder": "Totals",
+            "expression": "sum('crude_oil_refined_products_inv_dom_trans'[Value])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "2eb4f70f-0580-48b6-9695-40876131a9f0"
+          },
+          {
+            "name": "Total Crude oil and equivalents Opening Inventory",
+            "displayFolder": "Totals",
+            "expression": [
+              "CALCULATE([Total Opening Inventory],",
+              "    'products'[prid] = 1)"
+            ],
+            "formatString": "0",
+            "lineageTag": "18252a37-04be-475b-977c-22f41b31e54c"
+          },
+          {
+            "name": "Total Crude Oil and Equivalent Closing Inventory",
+            "displayFolder": "Totals",
+            "expression": [
+              "CALCULATE([Total Closing Inventory],",
+              "    'products'[prid] = 1)"
+            ],
+            "formatString": "0",
+            "lineageTag": "ef935413-9fa4-470a-b211-d085bb5b66b7"
+          },
+          {
+            "name": "Total Closing Inventory (addition)",
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "displayFolder": "Totals",
+            "expression": "[Total Crude Oil and Equivalent Closing Inventory] + [Total Refined Petroleum Products closing Inventory]",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "2b3aadd5-1926-42be-b8c4-5d6f0667b601"
+          },
+          {
+            "name": "Total Closing Inventory",
+            "displayFolder": "Totals",
+            "expression": [
+              "CALCULATE([Total Inventory Volume],",
+              "    'inventory_type'[invid] = 1)"
+            ],
+            "formatString": "0",
+            "lineageTag": "22619041-3211-4df1-b791-4df546fc634d"
+          },
+          {
+            "name": "Strategic Hedging Index",
+            "displayFolder": "Economic Analysis",
+            "expression": "DIVIDE([Total Crude Oil and Equivalent Closing Inventory], [Total Closing Inventory])",
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "1be94f70-58f6-48ae-b255-c25b53decc9e"
+          },
+          {
+            "name": "Maximum Crude oil and Equivalent Closing Volume",
+            "displayFolder": "Ranges",
+            "expression": [
+              "CALCULATE([Maximum Inventory Volume],",
+              "    'inventory_type'[invid] = 1,",
+              "        'products'[prid] = 1)"
+            ],
+            "formatString": "0",
+            "lineageTag": "2f15f917-b6e3-47e9-a27b-ce7744467cd7"
+          },
+          {
+            "name": "Maximum Crude oil and Equivalent Opening Inventory",
+            "displayFolder": "Ranges",
+            "expression": [
+              "CALCULATE([Maximum Inventory Volume],",
+              "    'inventory_type'[invid] = 2,",
+              "        'products'[prid] = 1)"
+            ],
+            "formatString": "0",
+            "lineageTag": "d43613fb-724c-4c3d-be1b-9e04f7864560"
+          },
+          {
+            "name": "Maximum Inventory Volume",
+            "displayFolder": "Ranges",
+            "expression": "MAX('crude_oil_refined_products_inv_dom_trans'[Value])",
+            "formatString": "0",
+            "lineageTag": "48b1db16-fa22-4a63-85bc-0dcb17d35ddb"
+          },
+          {
+            "name": "Minimum Crude oil and Equivalent Closing Inventories",
+            "displayFolder": "Ranges",
+            "expression": [
+              "",
+              "CALCULATE([Minimum Inventory Volume],",
+              "    'inventory_type'[invid] = 1,",
+              "        'products'[prid] = 1)"
+            ],
+            "formatString": "0",
+            "lineageTag": "d979d901-a2ff-4964-928e-892dcff20a8f"
+          },
+          {
+            "name": "Minimum Crude oil and Equivalent Opening Inventory",
+            "displayFolder": "Ranges",
+            "expression": [
+              "CALCULATE([Minimum Inventory Volume],",
+              "    'inventory_type'[invid] = 2,",
+              "        'products'[prid] = 1)"
+            ],
+            "formatString": "0",
+            "lineageTag": "b0b98b19-828e-499e-859a-157590932abb"
+          },
+          {
+            "name": "Minimum Inventory Volume",
+            "displayFolder": "Ranges",
+            "expression": "MIN('crude_oil_refined_products_inv_dom_trans'[Value])",
+            "formatString": "0",
+            "lineageTag": "7afbd784-2914-458e-8557-a57f38a01778"
+          },
+          {
+            "name": "Maximum Refined Petroleum Products (RPPs/HCLS) Closing Inventories",
+            "displayFolder": "Ranges",
+            "expression": [
+              "",
+              "    CALCULATE([Maximum Inventory Volume],",
+              "         'inventory_type'[invid] = 1,",
+              "            'products'[prid] = 2)"
+            ],
+            "formatString": "0",
+            "lineageTag": "bebe3032-653a-4ab9-974e-d906aca5036e"
+          },
+          {
+            "name": "Maximum Refined Petroleum Products (RPPs/HCLS) Opening Inventories",
+            "displayFolder": "Ranges",
+            "expression": [
+              "",
+              "    CALCULATE([Maximum Inventory Volume],",
+              "         'inventory_type'[invid] = 2,",
+              "            'products'[prid] = 2)"
+            ],
+            "formatString": "0",
+            "lineageTag": "f770a665-f7c2-4119-9edd-352d4ee9f1a5"
+          },
+          {
+            "name": "Minimum Refined Petroleum Products (RPPs/HCLS) Closing Volume",
+            "displayFolder": "Ranges",
+            "expression": [
+              "",
+              "    CALCULATE([Minimum Inventory Volume],",
+              "         'inventory_type'[invid] = 1,",
+              "            'products'[prid] = 2)"
+            ],
+            "formatString": "0",
+            "lineageTag": "28b2b795-0d52-4d68-ace9-f687daa7932f"
+          },
+          {
+            "name": "Minimum Refined Petroleum Products (RPPs/HCLS) Opening Inventories",
+            "displayFolder": "Ranges",
+            "expression": [
+              "",
+              "    CALCULATE([Minimum Inventory Volume],",
+              "         'inventory_type'[invid] = 2,",
+              "            'products'[prid] = 2)"
+            ],
+            "formatString": "0",
+            "lineageTag": "b14fe63a-1b3e-4978-862a-d705f75541e7"
+          },
+          {
+            "name": "RPPS/HCLS Inventory Fluctuation",
+            "displayFolder": "Economic Analysis",
+            "expression": "ABS( [Maximum Refined Petroleum Products (RPPs/HCLS) Closing Inventories] - [Minimum Refined Petroleum Products (RPPs/HCLS) Opening Inventories])",
+            "formatString": "0",
+            "lineageTag": "e7132206-c4ad-4c56-864f-f65b16e33ac1"
+          },
+          {
+            "name": "Average Closing Inventory",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDecimal\":true}"
+              }
+            ],
+            "displayFolder": "Economic Analysis",
+            "expression": "CALCULATE( AVERAGE('crude_oil_refined_products_inv_dom_trans'[Value]),'inventory_type'[Inventory Type] = \"Closed Inventories\")",
+            "formatString": "0",
+            "lineageTag": "6939f941-be26-4c07-81f1-4aee0dec853c"
+          },
+          {
+            "name": "Average Crude Oil and Equivalent Opening Inventory",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Averages",
+            "expression": [
+              "CALCULATE( AVERAGE('crude_oil_refined_products_inv_dom_trans'[Value]),",
+              "'inventory_type'[invid] = 2, ",
+              "'products'[prid] = 1)"
+            ],
+            "lineageTag": "1c98d2ad-909b-482d-bfe5-230893bd7c78"
+          },
+          {
+            "name": "Average Crude Oil and Equivalent Closing Inventory",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Averages",
+            "expression": [
+              "CALCULATE( AVERAGE('crude_oil_refined_products_inv_dom_trans'[Value]),",
+              "'inventory_type'[invid] = 1, ",
+              "'products'[prid] = 1)"
+            ],
+            "lineageTag": "da0aed39-4ade-4542-a168-7a3d8d19f261"
+          },
+          {
+            "name": "Average Refined Petroleum Products (RPPs) Closing Inventory",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Averages",
+            "expression": [
+              "",
+              "        CALCULATE( AVERAGE('crude_oil_refined_products_inv_dom_trans'[Value]),'inventory_type'[invid] = 1,",
+              "         'products'[prid]= 2)"
+            ],
+            "lineageTag": "92f09f4b-1894-4a83-8a8d-b48dfc2299b8"
+          },
+          {
+            "name": "Average Refined Petroleum Products (RPPs) Opening Inventory",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Averages",
+            "expression": [
+              "",
+              "        CALCULATE( AVERAGE('crude_oil_refined_products_inv_dom_trans'[Value]),'inventory_type'[invid] = 2,",
+              "         'products'[prid] = 2)"
+            ],
+            "lineageTag": "75f84ce0-9466-4627-bd44-e7b735d0cfdb"
+          },
+          {
+            "name": "Average Opening Inventory",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Averages",
+            "expression": "CALCULATE( AVERAGE('crude_oil_refined_products_inv_dom_trans'[Value]),'inventory_type'[invid] = 2)",
+            "lineageTag": "83415de1-13ef-4cad-9df9-e3fbfec5e3c0"
+          },
+          {
+            "name": "Crude Oil Precision Index",
+            "displayFolder": "Economic Analysis",
+            "expression": "DIVIDE([Total Crude Oil and Equivalent Closing Inventory]-[Average Crude Oil and Equivalent Opening Inventory],[Total Closing Inventory])",
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "ed584000-3594-4c17-a0e5-eb4cec3ee903"
+          },
+          {
+            "name": "RPPS/HCLs Precision Index",
+            "displayFolder": "Economic Analysis",
+            "expression": "DIVIDE([Total Refined Petroleum Products closing Inventory]-[Average Refined Petroleum Products (RPPs) Opening Inventory],[Total Closing Inventory])",
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "0890d83c-7cff-4331-8eda-20f8cbba5aa9"
+          },
+          {
+            "name": "Economic Health Index",
+            "displayFolder": "Economic Analysis",
+            "expression": "if([Total Closing Inventory]>[Average Closing Inventory],\"Positive\", \"Negative\")",
+            "lineageTag": "9678033e-ccb9-42d7-87a9-f273719b3d9f"
+          },
+          {
+            "name": "Total Demand",
+            "displayFolder": "Totals",
+            "expression": "[Total Opening Inventory]-[Total Closing Inventory]",
+            "formatString": "#,0",
+            "lineageTag": "1980c206-8744-4acc-83e9-27b79000f903"
+          },
+          {
+            "name": "Average Consumption",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Averages",
+            "expression": "[Average Opening Inventory]-[Average Closing Inventory]",
+            "lineageTag": "2fd6a002-3e8d-47de-ad23-41352900dc78"
+          },
+          {
+            "name": "Reserve Adequacy Ratio (6 Months)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDecimal\":true}"
+              }
+            ],
+            "displayFolder": "Economic Analysis",
+            "expression": "DIVIDE([Total Closing Inventory], ([Average Consumption] * 6))",
+            "formatString": "0",
+            "lineageTag": "7934dbd9-c985-4a16-b6a1-3641add7fc72"
+          },
+          {
+            "name": "Refined Products Precision Index",
+            "displayFolder": "Economic Analysis",
+            "expression": "DIVIDE([Total Refined Petroleum Products closing Inventory] - [Average Refined Petroleum Products (RPPs) Opening Inventory],[Total Closing Inventory])",
+            "formatString": "#,0.00%;-#,0.00%;#,0.00%",
+            "isHidden": true,
+            "lineageTag": "f02c2f98-d131-4a2c-a7c1-ad8839390daa"
+          },
+          {
+            "name": "Inventory Turnover Rate",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Regulatory Analysis",
+            "expression": "Divide([Total Opening Inventory]-[Total Closing Inventory],[Average Closing Inventory])",
+            "lineageTag": "0d2de2c7-079b-4452-9de1-3217b879b2c0"
+          },
+          {
+            "name": "Days of Supply",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Regulatory Analysis",
+            "expression": "DIVIDE([Total Closing Inventory], Divide([Total Opening Inventory],COUNTROWS('Date')))",
+            "lineageTag": "00a16c78-2305-4d40-a848-aa765b227556"
+          },
+          {
+            "name": "Inventory-to-Sales Ratio",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Regulatory Analysis",
+            "expression": "Divide([Average Closing Inventory],[Total Demand])",
+            "lineageTag": "51d06fa7-4a94-4c85-8894-3ef652f123b9"
+          },
+          {
+            "name": "Crude Oil and Equivalents Turnover Rate",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Regulatory Analysis",
+            "expression": "Divide([Total Crude oil and equivalents Opening Inventory]-[Total Crude Oil and Equivalent Closing Inventory],[Average Crude Oil and Equivalent Closing Inventory])",
+            "lineageTag": "9746d481-69ef-4582-9462-b3b39b2d0535"
+          },
+          {
+            "name": "RPPs/HCLS Turnover Rate",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Regulatory Analysis",
+            "expression": "Divide([Total Refined Petroleum Products Opening Inventory]-[Total Refined Petroleum Products closing Inventory],[Average Refined Petroleum Products (RPPs) Closing Inventory])",
+            "lineageTag": "91e1c094-1462-4908-b7eb-6842bfe83b38"
+          },
+          {
+            "name": "Crude Oil Inventory Balance",
+            "displayFolder": "Regulatory Analysis",
+            "expression": "[Total Crude Oil and Equivalent Closing Inventory]-[Total Crude oil and equivalents Opening Inventory]",
+            "formatString": "0",
+            "lineageTag": "53acdbbb-526d-4a30-94fd-42673a22d3ea"
+          },
+          {
+            "name": "RPPs/HCLs Inventory Balance",
+            "displayFolder": "Regulatory Analysis",
+            "expression": "[Total Refined Petroleum Products closing Inventory]-[Total Refined Petroleum Products Opening Inventory]",
+            "formatString": "0",
+            "lineageTag": "7dedb626-f03f-47c1-81a9-3f1c19fe7ec3"
+          },
+          {
+            "name": "Combined Inventory Balance Total",
+            "displayFolder": "Regulatory Analysis",
+            "expression": "[Crude Oil Inventory Balance]+[RPPs/HCLs Inventory Balance]",
+            "formatString": "0",
+            "lineageTag": "52cb0425-9c43-4009-a5d0-be44f9a7b236"
+          },
+          {
+            "name": "Crude Oil Turnover",
+            "displayFolder": "Regulatory Analysis",
+            "expression": "[Total Crude oil and equivalents Opening Inventory]-[Total Crude Oil and Equivalent Closing Inventory]",
+            "formatString": "0",
+            "lineageTag": "4d89f24b-15f1-473d-a18f-9bf4d58c1b64"
+          },
+          {
+            "name": "RPPs/HCLs Turnover",
+            "displayFolder": "Regulatory Analysis",
+            "expression": "[Total Refined Petroleum Products Opening Inventory] - [Total Refined Petroleum Products closing Inventory]",
+            "formatString": "0",
+            "lineageTag": "98870bcb-6d5e-41b7-89de-018d7536abf3"
+          },
+          {
+            "name": "Resilience_Index",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Regulatory Analysis",
+            "expression": [
+              "DIVIDE([Total Crude Oil and Equivalent Closing Inventory] + [Total Refined Petroleum Products Opening Inventory],[Total Opening Inventory])",
+              ""
+            ],
+            "lineageTag": "c1f2c36a-5253-41d0-9f5e-41d0acf841aa"
+          },
+          {
+            "name": "Inventory_Aging",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Regulatory Analysis",
+            "expression": [
+              "ABS([Average Crude Oil and Equivalent Closing Inventory] - [Average Crude Oil and Equivalent Opening Inventory] + ([Average Refined Petroleum Products (RPPs) Closing Inventory] - [Average Refined Petroleum Products (RPPs) Opening Inventory])",
+              ")"
+            ],
+            "lineageTag": "c6ec5d8f-f69d-4d88-a733-b478f1a7bb43"
+          },
+          {
+            "name": "Inventory_to_Sales_Ratio_Fluctuation",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Regulatory Analysis",
+            "expression": "ABS(DIVIDE([Total Crude oil and equivalents Opening Inventory],([Total Crude Oil and Equivalent Closing Inventory]-1)))",
+            "lineageTag": "0e1e1c04-0029-408f-b6ee-f9602f94c17a"
+          },
+          {
+            "name": "Days of Supply (CrudeOil&Equivalents)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Regulatory Analysis",
+            "expression": "DIVIDE([Total Crude Oil and Equivalent Closing Inventory],DIVIDE([Total Opening Inventory],COUNTROWS('Date')))",
+            "lineageTag": "9a856e35-a4fc-4c23-be47-2798b295bd1e"
+          },
+          {
+            "name": "Inventory Turnover",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Regulatory Analysis",
+            "expression": "Divide([Total Opening Inventory],[Average Closing Inventory])",
+            "lineageTag": "7bef2499-bf83-4d19-8e1a-39d9760b34f5"
+          },
+          {
+            "name": "Days of Supply (RPPs/HCLs)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Regulatory Analysis",
+            "expression": "DIVIDE([Total Refined Petroleum Products Opening Inventory],DIVIDE([Total Opening Inventory],COUNTROWS('Date')))",
+            "lineageTag": "e6852701-732f-401b-9bd0-bf884f55ed44"
+          },
+          {
+            "name": "Total Closing Inventory average per Products",
+            "displayFolder": "Totals",
+            "expression": [
+              "",
+              "AVERAGEX(",
+              "\tKEEPFILTERS(VALUES('products'[Products])),",
+              "\tCALCULATE([Total Closing Inventory])",
+              ")"
+            ],
+            "extendedProperties": [
+              {
+                "name": "MeasureTemplate",
+                "type": "json",
+                "value": {
+                  "daxTemplateName": "AveragePerCategory",
+                  "version": 0
+                }
+              }
+            ],
+            "formatString": "0",
+            "lineageTag": "6667b359-a77f-4ba0-9e28-1de5e57ee22a"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Measures table",
+            "mode": "import",
+            "source": {
+              "expression": "Row(\"Column\", BLANK())",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "oil_price",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "bd1f6939-5884-4de4-b769-961b31e63755",
+            "sourceColumn": "Date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Oil Price",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-CA\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\\$#,0.###############;-\\$#,0.###############;\\$#,0.###############",
+            "lineageTag": "c450f794-1d85-4ba5-a239-d60799a54aac",
+            "sourceColumn": "Oil Price",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "32bad757-155f-4536-ae65-b231c6438ea7",
+        "measures": [
+          {
+            "name": "Average oil Price",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-CA\"}"
+              }
+            ],
+            "expression": "AVERAGE('oil_price'[Oil Price])",
+            "formatString": "\\$#,0.###############;-\\$#,0.###############;\\$#,0.###############",
+            "lineageTag": "65eb5595-0bcc-4c6b-a867-ba0775117a02"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "oil_price",
+            "mode": "import",
+            "queryGroup": "Datamart",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Xml.Tables(Web.Contents(\"https://www.opec.org/basket/basketDayArchives.xml\")),",
+                "    Table0 = Source{0}[Table],",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Table0,{{\"Attribute:data\", type date}, {\"Attribute:val\", type number}}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Changed Type\",{{\"Attribute:data\", \"Date\"}, {\"Attribute:val\", \"Oil Price\"}}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Renamed Columns\",{{\"Oil Price\", Currency.Type}}),",
+                "    #\"Filtered Rows\" = Table.SelectRows(#\"Changed Type1\", each [Date] > #date(2020, 1, 1))",
+                "in",
+                "    #\"Filtered Rows\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "products",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "prid",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "2c261a4c-2467-4f9a-9729-cbf5b7894879",
+            "sourceColumn": "prid",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Products",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "eee9f356-6e4f-4625-b27d-3aee61baeaf9",
+            "sourceColumn": "Products",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "34619fce-a5c5-403f-86b2-d082e7e4988f",
+        "partitions": [
+          {
+            "name": "products",
+            "mode": "import",
+            "queryGroup": "Datamart",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\admin\\Desktop\\LaDV_Consulting\\CaseStudies\\Data\\Energy Analytics\\PIPELINE AND INVENTORY ANALYSIS\\Data Sources\\2510007501-eng.csv\"),[Delimiter=\",\", Columns=48, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}, {\"Column2\", type text}, {\"Column3\", type text}, {\"Column4\", type text}, {\"Column5\", type text}, {\"Column6\", type text}, {\"Column7\", type text}, {\"Column8\", type text}, {\"Column9\", type text}, {\"Column10\", type text}, {\"Column11\", type text}, {\"Column12\", type text}, {\"Column13\", type text}, {\"Column14\", type text}, {\"Column15\", type text}, {\"Column16\", type text}, {\"Column17\", type text}, {\"Column18\", type text}, {\"Column19\", type text}, {\"Column20\", type text}, {\"Column21\", type text}, {\"Column22\", type text}, {\"Column23\", type text}, {\"Column24\", type text}, {\"Column25\", type text}, {\"Column26\", type text}, {\"Column27\", type text}, {\"Column28\", type text}, {\"Column29\", type text}, {\"Column30\", type text}, {\"Column31\", type text}, {\"Column32\", type text}, {\"Column33\", type text}, {\"Column34\", type text}, {\"Column35\", type text}, {\"Column36\", type text}, {\"Column37\", type text}, {\"Column38\", type text}, {\"Column39\", type text}, {\"Column40\", type text}, {\"Column41\", type text}, {\"Column42\", type text}, {\"Column43\", type text}, {\"Column44\", type text}, {\"Column45\", type text}, {\"Column46\", type text}, {\"Column47\", type text}, {\"Column48\", type text}}),",
+                "    #\"Removed Top Rows\" = Table.Skip(#\"Changed Type\",9),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Removed Top Rows\", [PromoteAllScalars=true]),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Inventories\", type text}, {\"Mode of transport\", type text}, {\"Products\", type text}, {\"January 2020\", type text}, {\"February 2020\", Int64.Type}, {\"March 2020\", Int64.Type}, {\"April 2020\", Int64.Type}, {\"May 2020\", Int64.Type}, {\"June 2020\", Int64.Type}, {\"July 2020\", Int64.Type}, {\"August 2020\", Int64.Type}, {\"September 2020\", Int64.Type}, {\"October 2020\", Int64.Type}, {\"November 2020\", Int64.Type}, {\"December 2020\", Int64.Type}, {\"January 2021\", Int64.Type}, {\"February 2021\", Int64.Type}, {\"March 2021\", Int64.Type}, {\"April 2021\", Int64.Type}, {\"May 2021\", Int64.Type}, {\"June 2021\", Int64.Type}, {\"July 2021\", Int64.Type}, {\"August 2021\", Int64.Type}, {\"September 2021\", Int64.Type}, {\"October 2021\", Int64.Type}, {\"November 2021\", Int64.Type}, {\"December 2021\", Int64.Type}, {\"January 2022\", Int64.Type}, {\"February 2022\", Int64.Type}, {\"March 2022\", Int64.Type}, {\"April 2022\", Int64.Type}, {\"May 2022\", Int64.Type}, {\"June 2022\", Int64.Type}, {\"July 2022\", Int64.Type}, {\"August 2022\", Int64.Type}, {\"September 2022\", Int64.Type}, {\"October 2022\", Int64.Type}, {\"November 2022\", Int64.Type}, {\"December 2022\", Int64.Type}, {\"January 2023\", Int64.Type}, {\"February 2023\", Int64.Type}, {\"March 2023\", Int64.Type}, {\"April 2023\", Int64.Type}, {\"May 2023\", Int64.Type}, {\"June 2023\", Int64.Type}, {\"July 2023\", Int64.Type}, {\"August 2023\", Int64.Type}, {\"September 2023\", Int64.Type}}),",
+                "    #\"Removed Bottom Rows\" = Table.RemoveLastN(#\"Changed Type1\",13),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Removed Bottom Rows\",{\"Mode of transport\"}),",
+                "    #\"Added Index\" = Table.AddIndexColumn(#\"Removed Columns\", \"Index\", 1, 1, Int64.Type),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Added Index\",{\"Index\", \"Inventories\", \"Products\", \"January 2020\", \"February 2020\", \"March 2020\", \"April 2020\", \"May 2020\", \"June 2020\", \"July 2020\", \"August 2020\", \"September 2020\", \"October 2020\", \"November 2020\", \"December 2020\", \"January 2021\", \"February 2021\", \"March 2021\", \"April 2021\", \"May 2021\", \"June 2021\", \"July 2021\", \"August 2021\", \"September 2021\", \"October 2021\", \"November 2021\", \"December 2021\", \"January 2022\", \"February 2022\", \"March 2022\", \"April 2022\", \"May 2022\", \"June 2022\", \"July 2022\", \"August 2022\", \"September 2022\", \"October 2022\", \"November 2022\", \"December 2022\", \"January 2023\", \"February 2023\", \"March 2023\", \"April 2023\", \"May 2023\", \"June 2023\", \"July 2023\", \"August 2023\", \"September 2023\"}),",
+                "    #\"Merged Columns\" = Table.CombineColumns(Table.TransformColumnTypes(#\"Reordered Columns\", {{\"Index\", type text}}, \"en-CA\"),{\"Index\", \"Inventories\"},Combiner.CombineTextByDelimiter(\"\", QuoteStyle.None),\"Merged\"),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Merged Columns\",\"2\",\"Opening Inventories\",Replacer.ReplaceText,{\"Merged\"}),",
+                "    #\"Replaced Value1\" = Table.ReplaceValue(#\"Replaced Value\",\"3\",\"Opening Inventories\",Replacer.ReplaceText,{\"Merged\"}),",
+                "    #\"Removed Top Rows1\" = Table.Skip(#\"Replaced Value1\",1),",
+                "    #\"Replaced Value2\" = Table.ReplaceValue(#\"Removed Top Rows1\",\"5\",\"Closed Inventories\",Replacer.ReplaceText,{\"Merged\"}),",
+                "    #\"Unpivoted Other Columns\" = Table.UnpivotOtherColumns(#\"Replaced Value2\", {\"Merged\", \"Products\"}, \"Attribute\", \"Value\"),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Unpivoted Other Columns\",{{\"Attribute\", type date}, {\"Value\", Int64.Type}}),",
+                "    #\"Replaced Value3\" = Table.ReplaceValue(#\"Changed Type2\",\" 2\",\"\",Replacer.ReplaceText,{\"Products\"}),",
+                "    #\"Sorted Rows\" = Table.Sort(#\"Replaced Value3\",{{\"Attribute\", Order.Ascending}}),",
+                "    #\"Replaced Value4\" = Table.ReplaceValue(#\"Sorted Rows\",\"4\",\"\",Replacer.ReplaceText,{\"Merged\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Replaced Value4\",{{\"Merged\", \"Inventory Type\"}}),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Renamed Columns\",{\"Products\"}),",
+                "    #\"Removed Duplicates\" = Table.Distinct(#\"Removed Other Columns\"),",
+                "    #\"Added Index1\" = Table.AddIndexColumn(#\"Removed Duplicates\", \"Index\", 1, 1, Int64.Type),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Added Index1\",{{\"Index\", \"prid\"}}),",
+                "    #\"Reordered Columns1\" = Table.ReorderColumns(#\"Renamed Columns1\",{\"prid\", \"Products\"}),",
+                "    #\"Replaced Value5\" = Table.ReplaceValue(#\"Reordered Columns1\",\"Hydrocarbon Gas Liquids (HGLs) and Refined Petroleum Products (RPPs) 3\",\"Refined Petroleum Products (RPPs)\",Replacer.ReplaceText,{\"Products\"})",
+                "in",
+                "    #\"Replaced Value5\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
